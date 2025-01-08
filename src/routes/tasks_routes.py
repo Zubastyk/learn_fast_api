@@ -3,20 +3,10 @@ from typing import Annotated
 
 import uvicorn
 from fastapi import FastAPI, Depends
-from contextlib import asynccontextmanager
 
-from src.models.tasks_model import STaskAdd
-from src.database.database import create_tables
-from src.database.database import delete_tables
+from src.database.engine.session_maker import lifespan
+from src.schemas.tasks_model import STaskAdd
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await delete_tables()
-    print('База очищена')
-    await create_tables()
-    print('База готова к работе')
-    yield
-    print('Выключение')
 
 app = FastAPI(lifespan=lifespan)
 
