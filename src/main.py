@@ -13,4 +13,4 @@ app.include_router(tasks_routes)
 
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', reload=True, host="0.0.0.0", port="83")
+    uvicorn.run('main:app', reload=True, host="0.0.0.0", port=83)
