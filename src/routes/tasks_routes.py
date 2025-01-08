@@ -1,29 +1,28 @@
-from contextlib import asynccontextmanager
 from typing import Annotated
 
-import uvicorn
-from fastapi import FastAPI, Depends
+from fastapi import Depends, APIRouter
 
-from src.database.engine.session_maker import lifespan
+from src.database.repositories.repository import TaskRepository
 from src.schemas.tasks_model import STaskAdd
 
 
-app = FastAPI(lifespan=lifespan)
+router = APIRouter(
+    prefix='/tasks',
+    tags=['Tasks'],
+)
 
-tasks = []
 
-@app.post('/tasks')
+@router.post('')
 async def add_task(
         task: Annotated[STaskAdd, Depends()],
 ):
-    tasks.append(task)
-    return {'ok': True}
+    task_id = await TaskRepository.add_one(task)
+    return {'ok': True, 'task_id': task_id}
 
-# @app.get('/tasks')
-# def get_tasks():
-#     task = Task(name='Запиши это видео')
-#     return {'data': task}
+@router.get('')
+async def get_tasks():
+    tasks = await TaskRepository.get_all()
+    return {'tasks': tasks}
 
-if __name__ == '__main__':
-    uvicorn.run('tasks_routes:app', reload=True)
+
     
