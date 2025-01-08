@@ -8,4 +8,4 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.create false && poetry install --no-root
 
-CMD ["python", "main.py", "--host", "0.0.0.0", "--port", "80"]
+CMD ["python", "src/main.py", "--host", "0.0.0.0", "--port", "80"]
