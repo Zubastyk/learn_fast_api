@@ -19,7 +19,7 @@ async def add_task(
     return {'ok': True, 'task_id': task_id}
 
 @router.get('')
-async def get_tasks() -> STask:
+async def get_tasks() -> list[STask]:
     tasks = await TaskRepository.get_all()
     return tasks
 
