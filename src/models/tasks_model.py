@@ -3,6 +3,10 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class Task_model(BaseModel):
+
+class STaskAdd(BaseModel):
     name: str
     description: Optional[str] = None
+
+class STaskGet(STaskAdd):
+    id: int
