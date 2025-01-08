@@ -9,6 +9,6 @@ COPY pyproject.toml poetry.lock ./
 
 RUN poetry config virtualenvs.create false && poetry install --no-root
 
-COPY . ./
+COPY . .
 
-CMD ["uvicorn", "app/src/main:app", "--host", "0.0.0.0", "--port", "83"]
+CMD ["uvicorn", "src/main:app", "--host", "0.0.0.0", "--port", "83"]
