@@ -2,8 +2,8 @@
 import uvicorn
 from fastapi import FastAPI
 
-from database.engine.session_maker import lifespan
-from routes.tasks_routes import router as tasks_routes
+from src.database.engine.session_maker import lifespan
+from src.routes.tasks_routes import router as tasks_routes
 
 
 
